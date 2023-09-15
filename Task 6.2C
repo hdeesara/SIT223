@@ -9,23 +9,23 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo "Fetching source code from GitHub webhook"
-                echo "Building code using Maven automation tool"
+                echo "Fetching source code from GitHub webhook..."
+                echo "Building code using Maven automation tool..."
             }
         }
         stage('Unit Tests') {
             steps {
-                echo "Running unit tests to ensure the code functions as expected using Selenium"
+                echo "Running unit tests using Selenium..."
             }
         }
         stage('Code Analysis') {
             steps {
-                echo "Checking the quality of the code using SonarQube to ensure it meets the industry standard"
+                echo "Checking the quality of the code using SonarQube..."
             }
         }
  stage('Security Scan') {
             steps {
-                echo "Running security scan using OWASP ZAP to identify any vulnerabilities"
+                echo "Running security scan using OWASP ZAP to identify vulnerabilities..."
             }
         }
         stage('Deploy to Staging') {
@@ -36,7 +36,7 @@ pipeline {
         }
         stage('Integration Tests on Staging') {
             steps {
-                echo "Running integration tests to ensure application functions as expected in a production-like environment"
+                echo "Running integration tests to ensure application functions as expected"
             }
         }
         stage('Deploy to Production') {
@@ -47,12 +47,12 @@ pipeline {
     }
 
  post {
-        success {
+        always {
             echo 'Pipeline Successful'
             emailext subject: 'Pipeline Successful',
             body: 'The pipeline has completed successfully.',
             to: 'hemsithdeesara2000@gmail.com',
-            attachLog: true 
-        }
-    }
+            attachLog: true
+        }
+ }
 }
