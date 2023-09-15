@@ -1,0 +1,58 @@
+pipeline {
+    agent any
+
+    environment {
+        TESTING_ENVIRONMENT = "test-env"
+        PRODUCTION_ENVIRONMENT = "prod-env"
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                echo "Fetching source code from GitHub webhook"
+                echo "Building code using Maven automation tool"
+            }
+        }
+        stage('Unit Tests') {
+            steps {
+                echo "Running unit tests to ensure the code functions as expected using Selenium"
+            }
+        }
+        stage('Code Analysis') {
+            steps {
+                echo "Checking the quality of the code using SonarQube to ensure it meets the industry standard"
+            }
+        }
+ stage('Security Scan') {
+            steps {
+                echo "Running security scan using OWASP ZAP to identify any vulnerabilities"
+            }
+        }
+        stage('Deploy to Staging') {
+            steps {
+                echo "Deploying the application to the testing environment: ${env.TESTING_ENVIRONMENT}"
+                
+            }
+        }
+        stage('Integration Tests on Staging') {
+            steps {
+                echo "Running integration tests to ensure application functions as expected in a production-like environment"
+            }
+        }
+        stage('Deploy to Production') {
+            steps {
+                echo "Deploying the code to production environment: ${env.PRODUCTION_ENVIRONMENT}"
+            }
+        }
+    }
+
+ post {
+        success {
+            echo 'Pipeline Successful'
+            emailext subject: 'Pipeline Successful',
+            body: 'The pipeline has completed successfully.',
+            to: 'hemsithdeesara2000@gmail.com',
+            attachLog: true 
+        }
+    }
+}
